@@ -1,8 +1,8 @@
-from fastapi import FastAPI,Depends
+from fastapi import FastAPI,Depends,status,HTTPException
 from schemas import UserSchema
 from sqlalchemy.orm import Session
 from database import base,engine,get_db
-from models import User
+from models import UserModel
 
 app=FastAPI()
 
@@ -16,15 +16,21 @@ def home():
 
 @app.post('/user',response_model=UserSchema)
 def create_user(user:UserSchema,db:Session=Depends(get_db)):
-    user = User(name=user.name,age=user.age)
+    user = UserModel(name=user.name,age=user.age)
     db.add(user)
     db.commit()
     db.refresh(user)
     return user
 
-@app.get('/get/{id}')
-def user_with_id(user_id:int):
-    return {"user_id":user_id}
+@app.get('/user/{user_id}')
+def user_with_id(user_id:int,db:Session=Depends(get_db)):
+    user=db.query(UserModel).where(user_id==UserModel.id).first()
+
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="User with this id is not exist")
+    
+    return user
+
 
 
 
