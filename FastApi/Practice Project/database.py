@@ -3,9 +3,9 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 
-DATABASE_URL="postgresql://usman:ShaniMalik321@localhost:5432/practice_db"
+DATABASEURL="postgresql://usman:ShaniMalik321@localhost:5432/practice_db"
 
-engine=create_engine(DATABASE_URL)
+engine=create_engine(DATABASEURL)
 
 session_local=sessionmaker(autoflush=False,autocommit=False,bind=engine)
 
