@@ -4,7 +4,7 @@ from app.schemas.user import UserResponse,UserCreate
 from app.models.user import UserModel
 from app.db.database import get_db
 from typing import List
-from app.repositories.user import get,create
+from app.repositories.user import get,create,update,delete
 
 
 router=APIRouter(
@@ -20,4 +20,10 @@ def get_all_user(db:Session=Depends(get_db)):
 def create_user(request:UserCreate,db:Session=Depends(get_db)):
    return create(request=request,db=db)
 
-     
+@router.put('/{id}')
+def update_user(request:UserCreate,id:int,db:Session=Depends(get_db)):
+   return update(id,request,db)
+
+@router.delete('/{id}')
+def delete_user(id:int,db:Session=Depends(get_db)):
+   return delete(id,db)
