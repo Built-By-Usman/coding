@@ -1,4 +1,0 @@
-sqlalchemy
-uvicorn
-fastapi
-psycopg2
