@@ -1,0 +1,11 @@
+h1{
+    color: aqua;
+}
+p{
+    background-color: aqua;
+    display: inline;
+}
+
+a{
+    display: block;
+}
