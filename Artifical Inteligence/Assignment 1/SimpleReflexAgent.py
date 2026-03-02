@@ -27,17 +27,11 @@ class SimpleReflexAgent:
 
 
 
-
-
-
-
-
-
 environment = {
     'rooms':{'A':random.choice(['Clean','Dirty']),
              'B':random.choice(['Clean','Dirty'])
              },
-             'location':random.choice(["A","B"])
+             'location':"A"
 }
 
 agent=SimpleReflexAgent()

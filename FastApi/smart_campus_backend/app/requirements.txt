@@ -9,3 +9,4 @@ python-multipart
 alembic
 sendgrid
 python-dotenv
+resend
