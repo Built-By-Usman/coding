@@ -1,7 +1,7 @@
 from fastapi import APIRouter,Depends
 from app.models.user import UserModel
 from sqlalchemy.orm import Session
-from app.schemas.user import UserResponse,UserCreate
+from app.schemas.user import UserResponse,UserCreate,VerifyOtp,ResendOtp
 from app.db.database import get_db
 from typing import List
 from app.repositories.user import all,create,update,delete,all_teachers,all_students,unauthenticated_students,unauthenticated_teachers,approve_user,count_students,verify,resend
@@ -63,8 +63,8 @@ def create_user(request:UserCreate,db:Session=Depends(get_db)):
    return create(request=request,db=db)
 
 @router.post('/verify_otp',response_model=UserResponse)
-def verify_otp(email:EmailStr,otp:str,db:Session=Depends(get_db)):
-   return verify(email=email,otp_code=otp,db=db)
+def verify_otp(request:VerifyOtp,db:Session=Depends(get_db)):
+   return verify(email=request.email,otp_code=request.otp,db=db)
 
 @router.put('/{id}')
 def update_user(request:UserCreate,id:int,db:Session=Depends(get_db),current_user:UserResponse=Depends(get_current_user)):
@@ -75,5 +75,5 @@ def delete_user(id:int,db:Session=Depends(get_db),current_user:UserResponse=Depe
    return delete(id,db)
 
 @router.post('/resend_otp')
-def resend_otp(email:EmailStr,db:Session=Depends(get_db)):
-   return resend(email=email,db=db)
+def resend_otp(request:ResendOtp,db:Session=Depends(get_db)):
+   return resend(email=request.email,db=db)

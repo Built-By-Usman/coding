@@ -52,3 +52,11 @@ class TokenForAdmin(BaseModel):
 
 class TokenData(BaseModel):
     email: str | None = None
+
+
+class ResendOtp(BaseModel):
+    email:EmailStr
+
+class VerifyOtp(BaseModel):
+    email:EmailStr
+    otp:str
