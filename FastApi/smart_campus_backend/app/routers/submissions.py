@@ -18,16 +18,16 @@ def create_assignment(request:SubmissionCreate,db:Session=Depends(get_db),curren
     return submit_assignment(request=request,db=db,current_user=current_user) 
 
 
-@router.get('/assignment{assignment_id}',response_model=List[SubmissionResponse])
+@router.get('/assignment{assignment_id}/',response_model=List[SubmissionResponse])
 def view_all_assignments(assignment_id:int,db:Session=Depends(get_db),current_user:UserModel=Depends(get_current_user)):
     return get_all_submissions(assignment_id=assignment_id,db=db)
 
-@router.put('/submission_id',response_model=SubmissionResponse)
+@router.put('/submission_id/',response_model=SubmissionResponse)
 def assignment_updation(submission_id:int,request:SubmissionUpdate,db:Session=Depends(get_db),current_user:UserModel=Depends(get_current_user)):
     return update_submission(submission_id=submission_id,request=request,db=db,current_user=current_user)
 
 
-@router.delete('/submission_id',status_code=status.HTTP_204_NO_CONTENT)
+@router.delete('/submission_id/',status_code=status.HTTP_204_NO_CONTENT)
 def delete_assignment(submission_id:int,db:Session=Depends(get_db),current_user:UserModel=Depends(get_current_user)):
     return delete_submission(submission_id=submission_id,db=db,current_user=current_user)
 

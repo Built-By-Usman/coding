@@ -15,12 +15,12 @@ router=APIRouter(
 def get_all_assignments(db:Session=Depends(get_db)):
     return all(db=db)
 
-@router.get('/teacher_assignments/{teacher_id}',response_model=List[AssignmentResponse])
+@router.get('/teacher-assignments/{teacher_id}/',response_model=List[AssignmentResponse])
 def get_all_assignments(teacher_id:int,db:Session=Depends(get_db)):
     return teacher_assignments(teacher_id=teacher_id,db=db)
 
 
-@router.get('/course_assignments/{teacher_id}',response_model=List[AssignmentResponse])
+@router.get('/course-assignments/{teacher_id}/',response_model=List[AssignmentResponse])
 def get_all_assignments(course_id:int,db:Session=Depends(get_db)):
     return course_assignments(course_id=course_id,db=db)
 
