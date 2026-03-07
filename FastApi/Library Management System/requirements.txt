@@ -1,7 +1,0 @@
-fastapi
-sqlalchemy
-pydantic
-pyjwt
-pwdlib[argon2]
-psycopg2 
-python-multipart
